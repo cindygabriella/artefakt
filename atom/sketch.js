@@ -18,6 +18,8 @@ function setup() {
 
   // noLoop();
   //pixelDensity(10);
+
+
 }
 
 function draw() {
@@ -50,4 +52,12 @@ function draw() {
      pop();                     // <- reset the drawing context
    }
 
+        // test slider
+        yearSlider = createSlider(d.year);
+        yearSlider.position(300, 300);
+
+        const year = yearSlider.value();
+        text('year', yearSlider.x * 2 + yearSlider.width, yearSlider.height);
+        // text(str, x, y, [x2], [y2])
+        rect(year);
 }
