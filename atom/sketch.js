@@ -43,33 +43,46 @@ function draw() {
   noStroke();
   fill(80, 80, 200);
   stroke(255);
-  //Ich möchte das total als Y-Achse, die Jahre als X-Achse.
-  //Ist die Variable w falsch gemappt?
+  
+  //total als Y-Achse, die Jahre als X-Achse.
+  //Maximum Total finden
   var TotalMin = d3.min(data, function (d) {
     return d.Total;
   });
+  //Minimum total finden
   var TotalMax = d3.max(data, function (d) {
     return d.Total;
   })
+  //Kleinses Jahr finden
   var yearMin = d3.min(data, function (d) {
     return d.year;
   });
+  //Grösstes Jahr finden
   var yearMax = d3.max(data, function (d) {
     return d.year;
   });
+  //Anzhal Jahre rechnen
   var yearCount = yearMax - yearMin;
   for (var i = 0; i < data.length; i++) {
     d = data[i];
+
+    //Jahr auf die x-Achse mappen
     x = map(d.year, yearMin, yearMax, 0, width);
     //y = (height / d.year) + 10;
+
+    //total auf die y-Achse Mappen
     y = map(d.Total, TotalMin, TotalMax, 0, 100);
-    //w = (width / map(d.Total, 7051336451, 20611944995, 0, 100));
+
+    //total auf y-Achse mappen, alternative Variante
+    //y = map(d.Total, 0, TotalMax, 0, 100);
+
+    //Breite des Balkens
     w = width / yearCount;
+    //w = (width / map(d.Total, 7051336451, 20611944995, 0, 100));
     //h = (height * (i / data.length)) - 5;
-    //console.log(d.year,x,yearMin,yearMax);
-    console.log(d.Total, y);
+
     push();                    // <- push a drawing context
-    // translate(x, y);        // <- move to position
+    //translate(x, y);        // <- move to position
     //rect(0, 0, w, h);    
     rect(x, 0, w, y);           // <- draw a rectangle
     fill(255);                 // <- change colors
